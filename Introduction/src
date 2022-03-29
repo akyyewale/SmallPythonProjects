@@ -1,0 +1,112 @@
+# Load Average colors from an image and create dots on screen
+colors = colorgram.extract('image.jpg', 30)
+rgb_colors = []
+my_Screen.colormode(255)
+for color in colors:
+    r = color.rgb.r
+    g = color.rgb.g
+    b = color.rgb.b
+    rgb = (r, g, b)
+    rgb_colors.append(rgb)
+
+timmy.hideturtle()
+timmy.penup()
+timmy.forward(-250)
+timmy.right(90)
+timmy.forward(250)
+timmy.right(-90)
+timmy.showturtle()
+timmy.speed(0)
+for _ in range(10):
+    for _ in range(10):
+        timmy.showturtle()
+        timmy.pendown()
+        timmy.dot(20, random.choice(rgb_colors))
+        timmy.penup()
+        timmy.forward(50)
+    timmy.hideturtle()
+    timmy.left(90)
+    timmy.forward(50)
+    timmy.left(90)
+    timmy.forward(500)
+    timmy.right(180)
+
+#For spirogram
+timmy.speed(0)
+my_Screen.colormode(255)
+for _ in range(72):
+    rand_color = (random.randint(1, 255), random.randint(1, 255), random.randint(1, 255))
+    timmy.pencolor(rand_color)
+    timmy.circle(100)
+    timmy.right(5)
+
+
+#Basic Etch A sketch
+# Snakes Game
+import turtle
+
+timmy = turtle.Turtle()
+myScreen = turtle.Screen()
+
+
+def moveForward():
+    timmy.forward(10)
+
+def moveBackward():
+    timmy.backward(10)
+
+def rotateCounterClockwise():
+    timmy.left(10)
+
+def rotateClockWise():
+    timmy.right(10)
+
+def clear():
+    timmy.clear()
+    timmy.reset()
+
+
+myScreen.listen()
+myScreen.onkey(key="w", fun=moveForward)
+myScreen.onkey(key="s", fun=moveBackward)
+myScreen.onkey(key="a", fun=rotateCounterClockwise)
+myScreen.onkey(key="d", fun=rotateClockWise)
+myScreen.onkey(key="c", fun=clear)
+myScreen.exitonclick()
+
+
+
+#Turtle Race
+import random
+import turtle
+
+myScreen = turtle.Screen()
+myScreen.setup(500, 400)
+userBet = myScreen.textinput("Place Your Bets", "Which turtle will win the race?")
+colors = ["red", "orange", "green", "blue", "yellow", "purple"]
+
+turtles = []
+startYposition = -150
+
+for index in range(6):
+    tim = turtle.Turtle("turtle")
+    tim.color(colors[index])
+    tim.penup()
+    tim.setposition(-230, startYposition + index * 50)
+    turtles.append(tim)
+
+winCondition = False
+
+while not winCondition:
+    for index in range(6):
+        turtles[index].forward(random.randint(1, 10))
+        if turtles[index].xcor() > 100:
+            winningTurtleColor = colors[index]
+            winCondition = True
+
+if winningTurtleColor == userBet :
+    print ("You Win!")
+else:
+    print(f"You Lose! {winningTurtleColor} has won!")
+
+myScreen.exitonclick()
